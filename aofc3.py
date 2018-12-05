@@ -1,11 +1,11 @@
 import re
 
-F = open("inputday3.txt", 'r')
+F = open("inputday3a.txt", 'r')
 boxes = []
-for i in range(1000):
+for i in range(8):
     curlist = []
-    for x in range(1000):
-        curlist.append(".")
+    for x in range(8):
+         curlist.append(".")
     boxes.append(curlist)
 
 lines = F.readlines()
@@ -26,18 +26,25 @@ for line in lines:
     x = leftedge
     y = topedge
 
-    print(str(x) + " is x " + str(y) + " is y" + " bottom " + str(bottom) + " right " + str(right))
-    while y <= bottom:
-        while x <= right:
-            if str(boxes[x][y]).strip().isdigit():
+    while y < bottom:
+        while x < right:
+            if str(boxes[y][x]).strip().isdigit():
                 counter += 1
+                boxes[y][x] = 'X'
             else:
-                boxes[x][y] = number
-                print("in here!")
+                boxes[y][x] = number
             x += 1
         y += 1
+        x = leftedge
+
     #print("Number " + number + " Left edge " + leftedge + " top edge " + topedge + " width " + width + " height " + height)
 
 #print(lines)
+
+for i, count in enumerate(range(len(boxes))):
+    print(str(count) + " : ", end = '')
+    for j in range(len(boxes[i])):
+        print(boxes[i][j], end = '')
+    print("\n")
+
 print(counter)
-print(boxes[35])
